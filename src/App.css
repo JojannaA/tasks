@@ -15,7 +15,7 @@
 
 .App-header {
     width: 100%;
-    background-color: #751717;
+    background-color: #492962;
     min-height: 40vh;
     display: flex;
     flex-direction: column;
@@ -25,6 +25,13 @@
     color: white;
 }
 
+.App-triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid #ce0000;
+}
 .App-link {
     color: #61dafb;
 }
