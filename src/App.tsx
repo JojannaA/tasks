@@ -29,8 +29,8 @@ function App(): React.JSX.Element {
             <div className="triangle">
                 <Container>
                     <Row>
-                        <Col>1 of 2</Col>
-                        <Col>2 of 2</Col>
+                        <Col>Triangle One</Col>
+                        <Col>Triangle Two</Col>
                     </Row>
                 </Container>
             </div>
