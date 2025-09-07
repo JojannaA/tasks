@@ -26,11 +26,29 @@ function App(): React.JSX.Element {
                 <li>Thing two</li>
                 <li>Thing three</li>
             </ul>
-            <div className="triangle">
+            <div>
                 <Container>
                     <Row>
-                        <Col>Triangle One</Col>
-                        <Col>Triangle Two</Col>
+                        <Col>
+                            <div
+                                style={{
+                                    width: "100px",
+                                    height: "100px",
+                                    backgroundColor: "red",
+                                }}
+                            ></div>
+                            Rectangle One
+                        </Col>
+                        <Col>
+                            <div
+                                style={{
+                                    width: "100px",
+                                    height: "100px",
+                                    backgroundColor: "red",
+                                }}
+                            ></div>
+                            Rectangle Two
+                        </Col>
                     </Row>
                 </Container>
             </div>
