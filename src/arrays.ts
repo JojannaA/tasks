@@ -78,7 +78,10 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    return colors.every(
+        (color: string): boolean =>
+            color === "red" || color === "blue" || color === "green",
+    );
 }
 
 /**
@@ -102,5 +105,25 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let negativeNum = false;
+
+    const result = values.reduce((acc: number[], val: number): number[] => {
+        if (!negativeNum) {
+            if (val < 0) {
+                negativeNum = true;
+                const sum = acc.reduce(
+                    (a: number, b: number): number => a + b,
+                    0,
+                );
+                return [...acc, val, sum];
+            }
+            return [...acc, val];
+        }
+        return [...acc, val];
+    }, []);
+    if (!values.some((val: number) => val < 0)) {
+        const sum = values.reduce((a: number, b: number): number => a + b, 0);
+        result.push(sum);
+    }
+    return result;
 }
