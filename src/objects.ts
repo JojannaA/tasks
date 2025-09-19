@@ -100,8 +100,8 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    question.name = newName;
-    return question;
+    const newQuestion = { ...question, name: newName };
+    return newQuestion;
 }
 
 /**
@@ -110,7 +110,13 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    return question;
+    if (question.published) {
+        const newQuestion = { ...question, published: false };
+        return newQuestion;
+    } else {
+        const newQuestion = { ...question, published: true };
+        return newQuestion;
+    }
 }
 
 /**
@@ -120,7 +126,9 @@ export function publishQuestion(question: Question): Question {
  * The `published` field should be reset to false.
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
-    return oldQuestion;
+    const newName = `Copy of ${oldQuestion.name}`;
+    const newQuestion = { ...oldQuestion, id, name: newName, published: false };
+    return newQuestion;
 }
 
 /**
@@ -131,7 +139,7 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
  * Check out the subsection about "Nested Fields" for more information.
  */
 export function addOption(question: Question, newOption: string): Question {
-    return question;
+    return { ...question, options: [...question.options, newOption] };
 }
 
 /**
@@ -148,5 +156,15 @@ export function mergeQuestion(
     contentQuestion: Question,
     { points }: { points: number },
 ): Question {
-    return contentQuestion;
+    const newQuestion = {
+        id,
+        name,
+        body: contentQuestion.body,
+        type: contentQuestion.type,
+        options: [...contentQuestion.options],
+        expected: contentQuestion.expected,
+        points,
+        published: false,
+    };
+    return newQuestion;
 }
