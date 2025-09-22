@@ -63,24 +63,17 @@ export function getNames(questions: Question[]): string[] {
  * Consumes an array of questions and returns the sum total of all their points added together.
  */
 export function sumPoints(questions: Question[]): number {
-    let total = 0;
-    for (const question of questions) {
-        total += question.points;
-    }
-    return total;
+    return questions.reduce((total, q) => total + q.points, 0);
 }
 
 /***
  * Consumes an array of questions and returns the sum total of the PUBLISHED questions.
  */
 export function sumPublishedPoints(questions: Question[]): number {
-    let total = 0;
-    for (const question of questions) {
-        if (question.published) {
-            total += question.points;
-        }
-    }
-    return total;
+    return questions.reduce(
+        (total, q) => total + (q.published ? q.points : 0),
+        0,
+    );
 }
 
 /***
@@ -115,16 +108,12 @@ export function toCSV(questions: Question[]): string {
  * making the `text` an empty string, and using false for both `submitted` and `correct`.
  */
 export function makeAnswers(questions: Question[]): Answer[] {
-    const answers: Answer[] = [];
-    for (const question of questions) {
-        answers.push({
-            questionId: question.id,
-            text: "",
-            submitted: false,
-            correct: false,
-        });
-    }
-    return answers;
+    return questions.map((q) => ({
+        questionId: q.id,
+        text: "",
+        submitted: false,
+        correct: false,
+    }));
 }
 
 /***
@@ -132,11 +121,7 @@ export function makeAnswers(questions: Question[]): Answer[] {
  * each question is now published, regardless of its previous published status.
  */
 export function publishAll(questions: Question[]): Question[] {
-    const publishedQuestions: Question[] = [];
-    for (const question of questions) {
-        publishedQuestions.push({ ...question, published: true });
-    }
-    return publishedQuestions;
+    return questions.map((q) => ({ ...q, published: true }));
 }
 
 /***
@@ -148,12 +133,7 @@ export function sameType(questions: Question[]): boolean {
         return true;
     }
     const firstType = questions[0].type;
-    for (const question of questions) {
-        if (question.type !== firstType) {
-            return false;
-        }
-    }
-    return true;
+    return questions.every((question: Question) => question.type === firstType);
 }
 
 /***
@@ -253,12 +233,7 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number,
 ): Question[] {
-    const result: Question[] = [];
-    for (const question of questions) {
-        result.push(question);
-        if (question.id === targetId) {
-            result.push(duplicateQuestion(newId, question));
-        }
-    }
-    return result;
+    return questions.flatMap((q) =>
+        q.id === targetId ? [q, duplicateQuestion(newId, q)] : [q],
+    );
 }
