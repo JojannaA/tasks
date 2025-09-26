@@ -1,8 +1,11 @@
 import React from "react";
 import "./App.css";
-import image from "./image_folder/silly_owl.jpg";
-import Button from "react-bootstrap/Button";
-import { Col, Container, Row } from "react-bootstrap";
+import { RevealAnswer } from "./components/RevealAnswer";
+import { ChangeType } from "./components/ChangeType";
+import { StartAttempt } from "./components/StartAttempt";
+import { TwoDice } from "./components/TwoDice";
+import { CycleHoliday } from "./components/CycleHoliday";
+import { Counter } from "./components/Counter";
 
 function App(): React.JSX.Element {
     return (
@@ -11,51 +14,18 @@ function App(): React.JSX.Element {
                 UD CISC275 with React Hooks and TypeScript Joanna Amoah Hello
                 World
             </header>
-            <h1> Header text :D</h1>
-            <img src={image} alt="Silly Owl" />
-            <Button
-                onClick={() => {
-                    console.log("Hello World!");
-                }}
-            >
-                {" "}
-                Log Hello World
-            </Button>
-            <ul>
-                <li>Thing one</li>
-                <li>Thing two</li>
-                <li>Thing three</li>
-            </ul>
-            <div>
-                <Container>
-                    <Row>
-                        <Col>
-                            <div
-                                style={{
-                                    width: "100px",
-                                    height: "100px",
-                                    backgroundColor: "red",
-                                }}
-                            ></div>
-                            Rectangle One
-                        </Col>
-                        <Col>
-                            <div
-                                style={{
-                                    width: "100px",
-                                    height: "100px",
-                                    backgroundColor: "red",
-                                }}
-                            ></div>
-                            Rectangle Two
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-            <p>
-                Edit <code>src/App.tsx</code> and save. This page will
-                automatically reload.
-            </p>
+            <hr></hr>
+            <Counter></Counter>
+            <hr />
+            <RevealAnswer></RevealAnswer>
+            <hr />
+            <StartAttempt></StartAttempt>
+            <hr />
+            <TwoDice></TwoDice>
+            <hr />
+            <ChangeType></ChangeType>
+            <hr />
+            <CycleHoliday></CycleHoliday>
         </div>
     );
 }
